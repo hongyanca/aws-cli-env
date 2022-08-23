@@ -4,9 +4,23 @@
 
 This image is built from https://hub.docker.com/_/amazonlinux. It includes aws cli, util-linux, unzip, zsh, and nano. There are 3 pre-created users: alice, bob, and charlie. These users can be used to test AWS cross-account access using different profiles.
 
+
+
 ## Build the image
 
-```docker build -t aws-cli-env .```
+```shell
+docker build -t aws-cli-env .
+```
+
+
+
+## Multi-arch build
+
+```shell
+docker buildx build --platform linux/arm64,linux/amd64 -t [TAG] . --push
+```
+
+
 
 ## Run and access the container
 
@@ -14,6 +28,8 @@ This image is built from https://hub.docker.com/_/amazonlinux. It includes aws c
 docker run -it --rm --name awscli -d aws-cli-env
 docker exec -it --user root awscli /usr/bin/zsh
 ```
+
+
 
 ## Copy credentials from host to the container
 
@@ -24,6 +40,8 @@ docker cp [CREDENTIALS] awscli:/home/alice/.aws/
 docker exec -it awscli chown alice:alice /home/alice/.aws/credentials
 ```
 
+
+
 ## Delete credentials from the container
 
 ```shell
@@ -33,3 +51,9 @@ docker exec -it awscli rm -rf /home/bob/.aws/credentials
 docker exec -it awscli rm -rf /home/charlie/.aws/credentials
 ```
 
+
+
+## Credits:
+
+- buildx: https://github.com/docker/buildx
+- amazonlinux: https://hub.docker.com/_/amazonlinux

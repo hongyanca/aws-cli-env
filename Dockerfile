@@ -7,7 +7,7 @@ RUN yum update -y \
     && yum clean all \
     && mkdir /root/.aws \
     && cd /root \
-    && curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-`lscpu | grep Architecture | grep -Eo 'aarch64|x86_64'`.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && /root/aws/install \
     && rm /root/awscliv2.zip \
