@@ -17,7 +17,19 @@ docker build -t aws-cli-env .
 ## Multi-arch build
 
 ```shell
+wget https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-[arm64|amd64]
+mv buildx-v0.9.1.linux-[arm64|amd64] ~/.docker/cli-plugins/docker-buildx
+chmod +x ~/.docker/cli-plugins/docker-buildx
+docker buildx install
+docker buildx ls
+ls -al /proc/sys/fs/binfmt_misc/
+docker run --privileged --rm tonistiigi/binfmt --install all
+docker buildx create --use --name mybuilder
+docker buildx inspect mybuilder --bootstrap
+
 docker buildx build --platform linux/arm64,linux/amd64 -t [TAG] . --push
+
+docker buildx imagetools inspect [TAG]
 ```
 
 
