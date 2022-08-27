@@ -17,13 +17,16 @@ docker build -t aws-cli-env .
 ## Multi-arch build
 
 ```shell
-wget https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-[arm64|amd64]
-mv buildx-v0.9.1.linux-[arm64|amd64] ~/.docker/cli-plugins/docker-buildx
+export CPU_ARCH=`lscpu | grep Architecture | grep -Eo 'aarch64|x86_64' | sed 's/x86_64/amd64/g' | sed 's/aarch64/arm64/g'`
+wget https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-$CPU_ARCH
+mkdir -p ~/.docker/cli-plugins/
+mv buildx-v0.9.1.linux-$CPU_ARCH ~/.docker/cli-plugins/docker-buildx
 chmod +x ~/.docker/cli-plugins/docker-buildx
 docker buildx install
 docker buildx ls
 ls -al /proc/sys/fs/binfmt_misc/
 docker run --privileged --rm tonistiigi/binfmt --install all
+ls -al /proc/sys/fs/binfmt_misc/
 docker buildx create --use --name mybuilder
 docker buildx inspect mybuilder --bootstrap
 
