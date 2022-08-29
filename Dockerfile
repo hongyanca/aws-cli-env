@@ -12,7 +12,9 @@ RUN yum update -y \
     && /root/aws/install \
     && rm /root/awscliv2.zip \
     && rm -rf /root/aws \
-    && echo 'set nowrap\nset tabsize 4\nset tabstospaces\nunset mouse' > /root/.nanorc \
+    && echo 'set nowrap' > /root/.nanorc \
+    && echo 'set tabsize 4' >> /root/.nanorc \
+    && echo 'unset mouse' >> /root/.nanorc \
     && echo "export PROMPT='%n %/ %# '" > /root/.zshrc \
     && useradd -m -s /usr/bin/zsh alice \
     && cp /root/.nanorc /home/alice/.nanorc \
