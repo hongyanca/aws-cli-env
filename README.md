@@ -30,6 +30,7 @@ ls -al /proc/sys/fs/binfmt_misc/
 docker buildx create --use --name mybuilder
 docker buildx inspect mybuilder --bootstrap
 
+docker buildx prune
 docker buildx build --platform linux/arm64,linux/amd64 -t [TAG] . --push
 
 docker buildx imagetools inspect [TAG]
