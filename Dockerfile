@@ -6,7 +6,7 @@ LABEL vendor=contac@yanhong.ca
 ARG CACHEBUST=1
 
 RUN yum update -y \
-    && yum install util-linux unzip zsh nano -y \
+    && yum install util-linux unzip zsh nano groff -y \
     && yum clean all \
     && mkdir /root/.aws \
     && cd /root \
