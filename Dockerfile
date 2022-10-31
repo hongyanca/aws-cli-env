@@ -17,6 +17,7 @@ RUN yum update -y \
     && rm -rf /root/aws \
     && echo 'set nowrap' > /root/.nanorc \
     && echo 'set tabsize 4' >> /root/.nanorc \
+    && echo 'set tabstospaces' >> /root/.nanorc \
     && echo 'unset mouse' >> /root/.nanorc \
     && echo "export PROMPT='%n %/ %# '" > /root/.zshrc \
     && useradd -m -s /usr/bin/zsh alice \
