@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
 FROM amazonlinux:latest
-LABEL vendor=contac@yanhong.ca
+LABEL vendor=contact@yanhong.ca
 
 # Custom cache invalidation
 ARG CACHEBUST=1
 
 RUN yum update -y \
-    && yum install util-linux unzip zsh nano groff -y \
+    && yum install util-linux unzip zsh nano groff iputils bind-utils -y \
     && yum clean all \
     && mkdir /root/.aws \
     && cd /root \
