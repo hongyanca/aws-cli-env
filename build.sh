@@ -1,4 +1,7 @@
 #!/bin/bash
+echo 'Switching dockerhub account'
+rm ~/.docker/config.json && cp ~/.docker/config.json.awslabca ~/.docker/config.json
+
 echo 'Stopping awscli container...'
 docker stop awscli
 echo 'Removing awscli container image...'

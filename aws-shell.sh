@@ -1,0 +1,1 @@
+docker exec -it --user root awscli /usr/bin/zsh
